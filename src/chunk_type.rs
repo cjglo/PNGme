@@ -1,4 +1,6 @@
+use core::fmt;
 use std::str::FromStr;
+use std::fmt::Display;
 
 #[derive(Debug)]
 struct ChunkType {
@@ -13,6 +15,24 @@ impl ChunkType {
     pub fn is_critical(&self) -> bool {
         todo!()
     }
+
+    pub fn is_public(&self) -> bool {
+        todo!()
+    }
+
+    pub fn is_reserved_bit_valid(&self) -> bool {
+        todo!()
+    }
+
+    pub fn is_safe_to_copy(&self) -> bool {
+        todo!()
+    }
+
+    pub fn is_valid(&self) -> bool {
+        todo!()
+    }
+
+
 }
 
 #[derive(Debug)]
@@ -42,6 +62,12 @@ impl FromStr for ChunkType {
             })
         }
 
+    }
+}
+
+impl Display for ChunkType {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        write!(f, "{:?}", String::from_iter(self.bytes.to_be_bytes().map(|x| x as char).iter()))
     }
 }
 
