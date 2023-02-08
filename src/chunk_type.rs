@@ -1,4 +1,5 @@
 use std::str::FromStr;
+use core::fmt::{Display, Formatter};
 
 #[derive(Debug)]
 struct ChunkType {
@@ -6,13 +7,30 @@ struct ChunkType {
 }
 
 impl ChunkType {
-    pub fn bytes(self) -> [u8; 4] {
+    pub fn bytes(&self) -> [u8; 4] {
         self.bytes.to_be_bytes()
+    }
+
+    pub fn is_valid(&self) -> bool {
+        todo!()
     }
 
     pub fn is_critical(&self) -> bool {
         todo!()
     }
+
+    pub fn is_public(&self) -> bool {
+        todo!()
+    }
+
+    pub fn is_reserved_bit_valid(&self) -> bool {
+        todo!()
+    }
+
+    pub fn is_safe_to_copy(&self) -> bool {
+        todo!()
+    }
+
 }
 
 #[derive(Debug)]
@@ -43,6 +61,13 @@ impl FromStr for ChunkType {
         }
 
     }
+}
+
+impl Display for ChunkType {
+    fn fmt(&self, f: &mut Formatter<'_>) -> core::fmt::Result {
+            let bytes = self.bytes();
+            write!(f, "[{}, {}, {}, {}]", bytes[0], bytes[1], bytes[2], bytes[3])
+        }
 }
 
 impl PartialEq<ChunkType> for ChunkType {
